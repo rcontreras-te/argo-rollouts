@@ -24,6 +24,8 @@ spec:
                   "10.0.234.144/32"     -- for example only
                 })
 
+                ngx.log(ngx.STDERR, "REMOTE_ADDR = " .. ngx.var.remote_adr)
+                ngx.log(ngx.STDERR, "vpn_subnets = " .. vpn_subnets)
                 req_from_vpn = ipu.ip_in_cidrs(ngx.var.remote_addr, vpn_subnets)
                 if req_from_vpn then
                   ngx.header.["X-Canary"] = "let-me-in"
