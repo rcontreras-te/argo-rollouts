@@ -13,7 +13,7 @@ metadata:
         ngx.log(ngx.STDERR, "REMOTE_ADDR = " .. ngx.var.remote_addr)
         req_from_vpn = ipu.ip_in_cidrs(ngx.var.remote_addr, vpn_subnets)
         if req_from_vpn then
-          ngx.header.["X-Canary"] = "let-me-in"
+          ngx.header["X-Canary"] = "let-me-in"
         end
       }
 spec:
