@@ -14,7 +14,7 @@ spec:
           additionalIngressAnnotations:
             canary-by-header: X-Canary
             canary-by-header-value: let-me-in
-            server-snippet: |
+            configuration-snippet: |
               access_by_lua_block {
                 local ipu = require("iputils")
                 --
