@@ -11,14 +11,11 @@ spec:
       trafficRouting:
         nginx:
           stableIngress: rollouts-demo-stable
+          additionalIngressAnnotations:
+            canary-by-header: X-Canary
+            canary-by-header-value: let-me-in
       steps:
-      - setWeight: 10
-      - pause: {}
-      - setWeight: 25
-      - pause: {}
       - setWeight: 50
-      - pause: {}
-      - setWeight: 75
       - pause: {}
       - setWeight: 90
       - pause: {}

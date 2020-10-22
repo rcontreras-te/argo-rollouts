@@ -4,6 +4,21 @@ metadata:
   name: rollouts-demo-stable
   annotations:
     kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      access_by_lua_block {
+        local ipu = require("iputils")
+        --
+        -- ThousandEyes VPN CIDRs
+        --
+        local vpn_subnets = ipu.parse_cidrs({
+          "10.0.234.144/32"     -- for example only
+        })
+
+        req_from_vpn = ipu.ip_in_cidrs(ngx.var.remote_addr, vpn_subnets)
+        if req_from_vpn then
+          ngx.header.["X-Canary"] = "let-me-in"
+        end
+      }
 spec:
   rules:
   - host: canary.te-engg-dev-us.thousandeyes.com
