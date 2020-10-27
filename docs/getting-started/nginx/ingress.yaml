@@ -6,13 +6,11 @@ metadata:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/server-snippet: |
       access_by_lua_block {
-        local ipu = require("iputils")
-        local vpn_subnets = ipu.parse_cidrs({
-          "10.168.2.0/24"
-        })
+        local vpnutils = require("thousandeyes.vpn-utils")
+
         ngx.log(ngx.STDERR, "REMOTE_ADDR = " .. ngx.var.remote_addr)
-        req_from_vpn = ipu.ip_in_cidrs(ngx.var.remote_addr, vpn_subnets)
-        if req_from_vpn then
+
+        if vpnutils.in_vpn(ngx.var.remote_addr) then
           ngx.header["X-Canary"] = "let-me-in"
         end
       }
