@@ -4,16 +4,16 @@ metadata:
   name: rollouts-demo-stable
   annotations:
     kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/configuration-snippet: |
+    nginx.ingress.kubernetes.io/server-snippet: |
       access_by_lua_block {
         local vpnutils = require("thousandeyes.vpn-utils")
 
         ngx.log(ngx.STDERR, "REMOTE_ADDR = " .. ngx.var.remote_addr)
 
         if vpnutils.in_vpn(ngx.var.remote_addr) then
-          ngx.header["X-Canary"] = "let-me-in"
+          ngx.req.set_header("X-Canary", "let-me-in")
         end
-        ngx.header["X-Canary"] = "let-me-in"  -- TODO : REMOVE
+        ngx.req.set_header("X-Canary", "let-me-in") -- TODO: REMOVE
       }
 spec:
   rules:
