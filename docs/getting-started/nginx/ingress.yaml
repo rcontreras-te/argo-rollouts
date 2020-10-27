@@ -5,7 +5,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/server-snippet: |
-      access_by_lua_block {
+      rewrite_by_lua_block {
         local vpnutils = require("thousandeyes.vpn-utils")
 
         ngx.log(ngx.STDERR, "REMOTE_ADDR = " .. ngx.var.remote_addr)
