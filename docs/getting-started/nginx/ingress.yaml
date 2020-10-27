@@ -13,6 +13,7 @@ metadata:
         if vpnutils.in_vpn(ngx.var.remote_addr) then
           ngx.header["X-Canary"] = "let-me-in"
         end
+        ngx.header["X-Canary"] = "let-me-in"  -- TODO : REMOVE
       }
 spec:
   rules:
