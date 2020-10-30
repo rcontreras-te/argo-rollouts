@@ -6,7 +6,7 @@ metadata:
     kubernetes.io/ingress.class: nginx
 spec:
   rules:
-  - host: canary-demo.k8s2.stg.dc1.thousandeyes.com
+  - host: canary-demo.stg.dc1.thousandeyes.com
     http:
       paths:
       - path: /
