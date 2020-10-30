@@ -9,7 +9,7 @@ metadata:
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
 spec:
   rules:
-  - host: canary-demo.stg.dc1.thousandeyes.com
+  - host: canary-demo.k8s2.stg.dc1.thousandeyes.com
     http:
       paths:
       - path: /
@@ -19,5 +19,5 @@ spec:
           servicePort: 80
   tls:
   - hosts:
-    - canary-demo.stg.dc1.thousandeyes.com
+    - canary-demo.k8s2.stg.dc1.thousandeyes.com
     secretName: canary-demo-https-tls
